@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { data, episodeList } from "./data";
+import { episodeList } from "./data.js";
 
 export default function App() {
   // State or in plain english "REACT'S MEMORY"
