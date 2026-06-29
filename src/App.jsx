@@ -24,7 +24,7 @@ So therefore,
    !React will now remember this list as "episodes."*/
   /*//TODO: The app imports the array from `data` into a state variable.*/
   const [episodes, setEpisodes] = useState(episodeList);
-  
+
   //? React asks: "Is there anything else I should remember?"
   //
   //* Answer: Which episode the user has selected.
@@ -56,40 +56,46 @@ So therefore,
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Episode Guide</h1>
-      <ul>
 
-        {episodes.map((episode) => { //TODO: A list of episode names is rendered.
-          //!react has something when you map through something it requires a KEY
-          return (
-            <li
-        //TODO: Each item in the rendered list has a unique key.
-              key={episode.id}
-              className={selectedEpisodeId === episode.id ? "selected" : ""} 
-        //TODO: When an episode in the list is clicked, the selected episode is updated in state.
-            > 
-              {episode.title} 
-              <button onClick={() => handleSelect(episode.id)}>
-                {selectedEpisodeId === episode.id ? "Unselect" : "Select"}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      {selectedEpisode ? (
-    //TODO: If there is a selected episode, the app displays more details about it, including the episode's number, name, and description.
-        <section> 
-          <h2>
-            Episode {selectedEpisode.id}: {selectedEpisode.title}
-          </h2>
-          <p>{selectedEpisode.description}</p>
+      <main className="episode-layout">
+        <section className="episode-list">
+          <ul>
+            {episodes.map((episode) => {
+              //TODO: A list of episode names is rendered.
+              //!react has something when you map through something it requires a KEY
+              return (
+                <li
+                  //TODO: Each item in the rendered list has a unique key.
+                  key={episode.id}
+                  className={selectedEpisodeId === episode.id ? "selected" : ""}
+                  //TODO: When an episode in the list is clicked, the selected episode is updated in state.
+                >
+                  <span>{episode.title}</span>
+                  <button onClick={() => handleSelect(episode.id)}>
+                    {selectedEpisodeId === episode.id ? "Unselect" : "Select"}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         </section>
-      ) : (
-        
-  //TODO: If no episode is selected, the app shows a message encouraging the user to select an episode.
-        <h2>Please select an episode</h2>
-      )}
+        {selectedEpisode ? (
+          <section className="details">
+            {/* TODO: If there is a selected episode, show number, title, and description. */}
+            <h2>
+              Episode {selectedEpisode.id}: {selectedEpisode.title}
+            </h2>
+            <p>{selectedEpisode.description}</p>
+          </section>
+        ) : (
+          <section className="placeholder">
+            {/* TODO: If no episode is selected, show a message encouraging selection. */}
+            <h2>Please select an episode</h2>
+          </section>
+        )}
+      </main>
     </div>
   );
 }
